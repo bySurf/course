@@ -1,24 +1,50 @@
-{
-  "title": "Video Editor",
-  "tags": [
-    "Remote",
-    "Video Editing",
-    "Part-Time",
-    "Freelance"
-  ],
-  "department": "Video Editing",
-  "description": "As we grow our channel and try to create the best content on internet oddities, we're also looking for talented people to join the team!",
-  "rate": "$15/min",
-  "requirements": [
-    "2 - 3 years experience in Adobe Premiere Pro",
-    "Ability to work alone or with a partner",
-    "Ability to meet deadlines",
-    "Fluent in English",
-    "18/yo"
-  ],
-  "application_requirements": [
-    "Portfolio",
-    "Social Media with Work",
-    "Short text about yourself"
-  ]
-}
+[
+  {
+    "title": "Video Editor",
+    "tags": [
+      "Remote",
+      "Video Editing",
+      "Part-Time",
+      "Freelance"
+    ],
+    "department": "Video Editing",
+    "description": "As we grow our channel and try to create the best content on internet oddities, we're also looking for talented people to join the team!",
+    "rate": "$15/min",
+    "requirements": [
+      "2 - 3 years experience in Adobe Premiere Pro",
+      "Ability to work alone or with a partner",
+      "Ability to meet deadlines",
+      "Fluent in English",
+      "18/yo"
+    ],
+    "application_requirements": [
+      "Portfolio",
+      "Social Media with Work",
+      "Short text about yourself"
+    ]
+  },
+  {
+    "title": "Sound Designer",
+    "tags": [
+      "Remote",
+      "Sound Design",
+      "Part-Time",
+      "Freelance"
+    ],
+    "department": "Content Production",
+    "description": "We're looking for someone to bring the visuals in our videos to life with the use of sound design and processing the sound effects to fit the feel of a given scene.",
+    "rate": "$5/min",
+    "requirements": [
+      "2 - 3 years experience in Adobe Premiere Pro (SFX Design specifically)",
+      "Ability to work alone or with a partner",
+      "Ability to meet deadlines",
+      "Fluent in English",
+      "18/yo"
+    ],
+    "application_requirements": [
+      "Portfolio",
+      "Social Media with Work (specifically a video with only SFX)",
+      "Short text about yourself"
+    ]
+  }
+]
