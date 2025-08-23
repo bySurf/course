@@ -27,7 +27,7 @@
     .wrap{max-width:1200px; margin:0 auto; padding:28px 20px 80px}
 
     .controls{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:18px 0 18px}
-    .btn{appearance:none; border:none; cursor:pointer; padding:10px 18px; border-radius:12px; background:var(--brand); color:#fff; font-family:'Roboto Mono', monospace; font-weight:700; font-size:14px; transition:transform .06s ease; display:inline-block; width:93px}
+    .btn{appearance:none; text-align: center; border:none; cursor:pointer; padding:10px 18px; border-radius:12px; background:var(--brand); color:#fff; font-family:'Roboto Mono', monospace; font-weight:700; font-size:14px; transition:transform .3s ease; display:inline-block; width:auto}
     .btn:hover{transform:translateY(-1px)}
     .btn:active{transform:translateY(0)}
     .chip{background:#171717; border:1px solid var(--card-b); color:var(--fg)}
@@ -100,6 +100,8 @@
 
         const link = document.createElement('a');
         link.href = c.href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
         link.setAttribute('aria-label', `Open course: ${c.title}`);
 
         const wrap = document.createElement('div');
@@ -124,6 +126,8 @@
         sub.textContent = c.description;
         const button = document.createElement('a');
         button.href = c.href;
+        button.target = '_blank';
+        button.rel = 'noopener noreferrer';
         button.className = 'btn';
         button.textContent = 'View Course';
 

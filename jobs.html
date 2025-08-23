@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Opportunities · bySurf</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f0f0f;
+      --fg: #ffffff;
+      --muted: rgba(255,255,255,0.80);
+      --panel: rgba(255,255,255,0.06);
+      --panel-hover: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.12);
+      --tag-bg: rgba(255,255,255,0.10);
+      --btn: #009dff;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--fg); }
+
+    /* Typography */
+    .title-font { font-family: Inter, ui-sans-serif, system-ui; font-weight: 700; }
+    .mono { font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-weight: 700; }
+    h1,h2,h3 { letter-spacing: -0.01em; }
+
+    /* Layout */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1rem; }
+    header.site { display: flex; align-items: center; gap: .75rem; padding: 2.5rem 0 1rem; }
+    .title { font-size: clamp(1.75rem, 2.5vw, 2.5rem); line-height: 1.1; }
+    .subtitle { font-size: .875rem; opacity: .8; margin-top: .25rem; }
+    .desc { margin-top: 1rem; max-width: 60ch; opacity: .9; }
+
+    /* Grid */
+    .grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* Card */
+    .card { border: 1px solid var(--border); background: var(--panel); border-radius: 1rem; padding: 1.25rem; display: flex; flex-direction: column; transition: background .2s ease; }
+    .card:hover { background: var(--panel-hover); }
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .job-title { font-size: 1.125rem; line-height: 1.2; margin: 0; }
+
+    /* Tags */
+    .tags { margin-top: .75rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+    .tag { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .6rem; border-radius: 999px; border: 1px solid var(--border); background: var(--tag-bg); font-size: .75rem; }
+
+    /* Buttons */
+    .btn { background: var(--btn); color: #fff; border: 0; border-radius: .75rem; padding: .5rem .9rem; display: inline-flex; align-items: center; gap: .5rem; cursor: pointer; text-decoration: none; box-shadow: 0 6px 14px rgba(0,157,255,.28); transition: filter .15s ease; }
+    .btn:hover { filter: brightness(1.1); }
+    .btn:active { filter: brightness(.95); }
+    .btn--small { padding: .5rem .8rem; align-self: flex-end; margin-top: 1rem; }
+    .btn--block { width: 100%; padding: .8rem 1rem; margin-top: 1.25rem; }
+
+    /* States */
+    .state { text-align: center; opacity: .8; padding: 4rem 0; }
+
+    /* Modal */
+    .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(2px); display: none; }
+    .modal { position: fixed; inset: 0; display: grid; place-items: center; padding: 1rem; pointer-events: none; }
+    .modal__card { width: 100%; max-width: 720px; border: 1px solid var(--border); background: #121212; border-radius: 1rem; padding: 1.25rem; box-shadow: 0 24px 60px rgba(0,0,0,.5); pointer-events: auto; }
+    .modal__top { display: flex; align-items: center; gap: .5rem; }
+    .modal__spacer { flex: 1; }
+    .icon-btn { background: transparent; border: 0; color: inherit; border-radius: .5rem; padding: .4rem; cursor: pointer; }
+    .icon-btn:hover { background: rgba(255,255,255,.06); }
+    .section-title { margin: 1rem 0 .25rem; font-size: 1.1rem; opacity: .9; }
+    .list { margin: .35rem 0 0; padding-left: 1.1rem; opacity: .9; }
+    .muted { opacity: .9; }
+
+    footer { padding: 2.5rem 0; text-align: center; opacity: .6; }
+    .hidden { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="container">
+      <header class="site">
+        <!-- Removed suitcase icon per request -->
+        <div>
+          <h1 class="title title-font">Opportunities</h1>
+          <p class="subtitle mono">bySurf</p>
+        </div>
+      </header>
+      <p class="desc mono">
+        As we grow our channel and try to create the best content on internet oddities, we're also looking for talented people to join the team!
+      </p>
+
+      <section id="jobsGrid" class="grid" aria-live="polite"></section>
+
+      <footer class="mono">© <span id="year"></span> bySurf</footer>
+    </div>
+  </main>
+
+  <!-- Backdrop + Modal -->
+  <div id="backdrop" class="backdrop" aria-hidden="true"></div>
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal__top">
+        <h2 id="modalTitle" class="title-font" style="font-size:1.4rem; margin:0"></h2>
+        <div class="modal__spacer"></div>
+        <button id="closeModal" class="icon-btn" aria-label="Close">
+          <!-- Close Icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <div id="modalTags" class="tags" style="margin-top:.6rem"></div>
+      <div id="modalBody" class="mono muted" style="margin-top:.5rem"></div>
+      <div id="modalRateWrap" class="mono"></div>
+      <div id="modalReqs"></div>
+      <div id="modalAppReqs"></div>
+      <a id="applyBtn" class="btn btn--block mono" href="mailto:hello@studiobysurf.com">Apply</a>
+    </div>
+  </div>
+
+  <script>
+    const DATA_URL = "https://raw.githubusercontent.com/openai/gpt-privacy/main/examples/jobs.json"; // ← Replace with your GitHub Pages JSON URL, e.g. https://username.github.io/jobs.json
+
+    const els = {
+      grid: document.getElementById('jobsGrid'),
+      year: document.getElementById('year'),
+      backdrop: document.getElementById('backdrop'),
+      modal: document.getElementById('modal'),
+      closeModal: document.getElementById('closeModal'),
+      modalTitle: document.getElementById('modalTitle'),
+      modalTags: document.getElementById('modalTags'),
+      modalBody: document.getElementById('modalBody'),
+      modalRateWrap: document.getElementById('modalRateWrap'),
+      modalReqs: document.getElementById('modalReqs'),
+      modalAppReqs: document.getElementById('modalAppReqs'),
+      applyBtn: document.getElementById('applyBtn'),
+    };
+
+    els.year.textContent = new Date().getFullYear();
+
+    function tagIcon(size=16) {
+      const svg = `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.59 13.41 12 22l-9-9V4h9l8.59 8.59Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>`;
+      const span = document.createElement('span');
+      span.innerHTML = svg;
+      return span.firstChild;
+    }
+    function externalIcon(size=16){
+      const svg = `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 3h7v7M10 14 21 3M21 10v11H3V3h11"/></svg>`;
+      const span = document.createElement('span');
+      span.innerHTML = svg;
+      return span.firstChild;
+    }
+
+    function normalizeTags(tags) {
+      if (Array.isArray(tags)) return tags;
+      if (typeof tags === 'string') return tags.split(',').map(s => s.trim()).filter(Boolean);
+      return [];
+    }
+
+    function stateEl(text) {
+      const d = document.createElement('div');
+      d.className = 'state mono';
+      d.textContent = text;
+      return d;
+    }
+
+    function createTagPill(text) {
+      const pill = document.createElement('span');
+      pill.className = 'tag mono';
+      pill.appendChild(tagIcon(14));
+      const t = document.createTextNode(' ' + text);
+      pill.appendChild(t);
+      return pill;
+    }
+
+    function createCard(job) {
+      const card = document.createElement('article');
+      card.className = 'card';
+
+      const header = document.createElement('div');
+      header.className = 'card-header';
+      const title = document.createElement('h3');
+      title.className = 'job-title title-font';
+      title.textContent = job.title || 'Untitled role';
+      header.appendChild(title);
+      card.appendChild(header);
+
+      const tagsWrap = document.createElement('div');
+      tagsWrap.className = 'tags';
+      normalizeTags(job.tags).forEach(t => tagsWrap.appendChild(createTagPill(t)));
+      card.appendChild(tagsWrap);
+
+      const btn = document.createElement('button');
+      btn.className = 'btn btn--small mono';
+      btn.type = 'button';
+      btn.append('Learn more ');
+      btn.appendChild(externalIcon(16));
+      btn.addEventListener('click', () => openModal(job));
+      card.appendChild(btn);
+
+      return card;
+    }
+
+    async function loadJobs() {
+      els.grid.innerHTML = '';
+      els.grid.appendChild(stateEl('Loading roles…'));
+      try {
+        const res = await fetch(DATA_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to fetch jobs');
+        const data = await res.json();
+        const jobs = Array.isArray(data) ? data : (data.jobs || []);
+        els.grid.innerHTML = '';
+        if (!jobs.length) {
+          els.grid.appendChild(stateEl('No positions posted yet. Check back soon.'));
+          return;
+        }
+        jobs.forEach(job => els.grid.appendChild(createCard(job)));
+      } catch (err) {
+        console.error(err);
+        els.grid.innerHTML = '';
+        const e = stateEl("Couldn't load jobs yet. Add your GitHub Pages JSON URL in DATA_URL.");
+        els.grid.appendChild(e);
+      }
+    }
+
+    // Modal logic
+    let lastFocus = null;
+    function openModal(job) {
+      lastFocus = document.activeElement;
+      els.modal.setAttribute('aria-hidden', 'false');
+      els.backdrop.setAttribute('aria-hidden', 'false');
+      els.backdrop.style.display = 'block';
+
+      // Fill content
+      els.modalTitle.textContent = job.title || 'Job';
+      els.modalTags.innerHTML = '';
+      normalizeTags(job.tags).forEach(t => els.modalTags.appendChild(createTagPill(t)));
+
+      els.modalBody.innerHTML = '';
+      if (job.description) {
+        const h = document.createElement('h3');
+        h.className = 'section-title title-font';
+        h.textContent = 'Job description';
+        const p = document.createElement('p');
+        p.className = 'mono muted';
+        p.style.marginTop = '.25rem';
+        p.textContent = job.description;
+        els.modalBody.appendChild(h);
+        els.modalBody.appendChild(p);
+      }
+
+      els.modalRateWrap.innerHTML = '';
+      if (job.rate) {
+        const h = document.createElement('h3');
+        h.className = 'section-title title-font';
+        h.textContent = 'Rate';
+        const p = document.createElement('p');
+        p.className = 'mono muted';
+        p.style.marginTop = '.25rem';
+        p.textContent = job.rate;
+        els.modalRateWrap.appendChild(h);
+        els.modalRateWrap.appendChild(p);
+      }
+
+      els.modalReqs.innerHTML = '';
+      if (Array.isArray(job.requirements) && job.requirements.length) {
+        const h = document.createElement('h3');
+        h.className = 'section-title title-font';
+        h.textContent = 'Requirements';
+        const ul = document.createElement('ul');
+        ul.className = 'list mono';
+        job.requirements.forEach(r => { const li = document.createElement('li'); li.textContent = r; ul.appendChild(li); });
+        els.modalReqs.appendChild(h);
+        els.modalReqs.appendChild(ul);
+      }
+
+      els.modalAppReqs.innerHTML = '';
+      if (Array.isArray(job.application_requirements) && job.application_requirements.length) {
+        const h = document.createElement('h3');
+        h.className = 'section-title title-font';
+        h.textContent = 'Application email requirements';
+        const ul = document.createElement('ul');
+        ul.className = 'list mono';
+        job.application_requirements.forEach(r => { const li = document.createElement('li'); li.textContent = r; ul.appendChild(li); });
+        els.modalAppReqs.appendChild(h);
+        els.modalAppReqs.appendChild(ul);
+      }
+
+      // Focus management
+      document.body.style.overflow = 'hidden';
+      els.closeModal.focus();
+    }
+
+    function closeModal() {
+      els.modal.setAttribute('aria-hidden', 'true');
+      els.backdrop.setAttribute('aria-hidden', 'true');
+      els.backdrop.style.display = 'none';
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+
+    els.backdrop.addEventListener('click', closeModal);
+    els.closeModal.addEventListener('click', closeModal);
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    loadJobs();
+  </script>
+</body>
+</html>
