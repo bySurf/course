@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>bySurf — Courses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0f0f;
+      --fg:#eaeaea;
+      --muted:#b5b5b5;
+      --brand:#009dff;
+      --card:#141414;
+      --card-b:#1f1f1f;
+    }
+    body{margin:0; background:var(--bg); color:var(--fg); font-family:'Roboto Mono', monospace; font-weight:700}
+    a{color:inherit; text-decoration:none}
+
+    .hero{position:relative; min-height:clamp(240px, 40vw, 460px); display:flex; align-items:flex-end}
+    .hero::before{content:""; position:absolute; inset:0; background:url('https://images.pexels.com/photos/303333/pexels-photo-303333.jpeg') center/cover no-repeat}
+    .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(15,15,15,0) 0%, #0f0f0f 80%)}
+    .hero-content{position:relative; z-index:1; max-width:1200px; margin:0 auto; width:100%; padding:48px 20px 28px}
+    .title{font-family:'Inter', system-ui; font-weight:800; font-size:clamp(28px, 3.6vw, 52px)}
+    .desc{color:var(--muted); line-height:1.5; font-size:clamp(14px,1.7vw,18px)}
+
+    .wrap{max-width:1200px; margin:0 auto; padding:28px 20px 80px}
+
+    .controls{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:18px 0 18px}
+    .btn{appearance:none; border:none; cursor:pointer; padding:10px 18px; border-radius:12px; background:var(--brand); color:#fff; font-family:'Roboto Mono', monospace; font-weight:700; font-size:14px; transition:transform .06s ease; display:inline-block; width:93px}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .chip{background:#171717; border:1px solid var(--card-b); color:var(--fg)}
+    .chip.active{background:var(--brand); border-color:var(--brand)}
+
+    .grid{display:grid; grid-template-columns:repeat(1, minmax(0, 1fr)); gap:16px; margin-top:6px}
+    @media (min-width:560px){.grid{grid-template-columns:repeat(2, minmax(0,1fr))}}
+    @media (min-width:1000px){.grid{grid-template-columns:repeat(3, minmax(0,1fr))}}
+
+    .card{background:var(--card); border:1px solid var(--card-b); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; position:relative}
+    .thumb-wrap{position:relative}
+    .thumb{aspect-ratio:16/9; width:100%; object-fit:cover; display:block}
+    .badge{position:absolute; left:10px; top:10px; background:rgba(0,0,0,.7); padding:6px 10px; border-radius:999px; font-size:12px}
+    .meta{padding:14px 14px 16px; display:grid; gap:10px}
+    .meta h3{font-family:'Inter', system-ui; font-weight:800; margin:0; font-size:18px}
+    .meta .sub{color:var(--muted); font-size:12px}
+
+    footer{margin-top:40px; color:var(--muted); font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-content">
+      <h1 class="title">bySurf Courses</h1>
+      <p class="desc">For future & existing team members to learn the content production process of bySurf documentaries.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="controls" id="filters"></div>
+    <section id="courses" class="grid"></section>
+    <footer><p></p></footer>
+  </div>
+
+  <script>
+    const COURSES = [
+      {
+        id: 'editing',
+        title: 'Editing',
+        description: 'Learn about specific types of edits in bySurf videos and learn how to re-create them.',
+        href: 'https://sites.google.com/view/bysurf-opportunities/courses/editing',
+        banner: 'https://i.ytimg.com/vi/6NMuz4b3EHU/maxresdefault.jpg',
+        category: 'Video Editing'
+      }
+    ];
+
+    const categories = ['All', ...Array.from(new Set(COURSES.map(c => c.category)))];
+    let currentFilter = 'All';
+
+    const filtersEl = document.getElementById('filters');
+    const gridEl = document.getElementById('courses');
+
+    function renderFilters(){
+      filtersEl.innerHTML = '';
+      categories.forEach(cat => {
+        const b = document.createElement('button');
+        b.className = 'btn chip' + (cat === currentFilter ? ' active' : '');
+        b.textContent = cat;
+        b.addEventListener('click', () => { currentFilter = cat; renderFilters(); renderCourses(); });
+        filtersEl.appendChild(b);
+      });
+    }
+
+    function renderCourses(){
+      const list = currentFilter === 'All' ? COURSES : COURSES.filter(c => c.category === currentFilter);
+      gridEl.innerHTML = '';
+      list.forEach(c => {
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        const link = document.createElement('a');
+        link.href = c.href;
+        link.setAttribute('aria-label', `Open course: ${c.title}`);
+
+        const wrap = document.createElement('div');
+        wrap.className = 'thumb-wrap';
+        const img = document.createElement('img');
+        img.className = 'thumb';
+        img.alt = `${c.title} banner`;
+        img.loading = 'lazy';
+        img.src = c.banner;
+        const badge = document.createElement('div');
+        badge.className = 'badge';
+        badge.textContent = c.category;
+        wrap.appendChild(img);
+        wrap.appendChild(badge);
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        const h = document.createElement('h3');
+        h.textContent = c.title;
+        const sub = document.createElement('div');
+        sub.className = 'sub';
+        sub.textContent = c.description;
+        const button = document.createElement('a');
+        button.href = c.href;
+        button.className = 'btn';
+        button.textContent = 'View Course';
+
+        meta.appendChild(h);
+        meta.appendChild(sub);
+        meta.appendChild(button);
+
+        link.appendChild(wrap);
+        card.appendChild(link);
+        card.appendChild(meta);
+        gridEl.appendChild(card);
+      });
+    }
+
+    renderFilters();
+    renderCourses();
+  </script>
+</body>
+</html>
