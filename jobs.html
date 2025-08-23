@@ -67,7 +67,6 @@
     .icon-btn{background:transparent;border:0;color:inherit;border-radius:.6rem;padding:.45rem;cursor:pointer}
     .icon-btn:hover{background:rgba(255,255,255,.06)}
 
-    /* Modal content spacing to reduce crammed look */
     .section{margin-top:1rem}
     .section + .section{margin-top:1.25rem}
     .section-title{margin:0 0 .5rem;font-size:1.05rem;opacity:.95}
@@ -75,7 +74,6 @@
     .list{margin:.25rem 0 0;padding-left:1.15rem}
     .list li{margin:.25rem 0}
 
-    /* soft dividers */
     .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:1rem 0}
 
     footer{padding:2rem 0;text-align:center;opacity:.6}
@@ -168,7 +166,7 @@
       } catch(e){
         els.grid.classList.add('empty');
         els.grid.innerHTML='';
-        els.grid.appendChild(stateEl("Couldn't load jobs yet. Please verify your JSON URL."));
+        els.grid.appendChild(stateEl("No open positions at the moment."));
       }
     }
 
