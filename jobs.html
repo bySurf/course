@@ -4,8 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Opportunities · bySurf</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   <style>
     :root { color-scheme: dark; --bg:#0f0f0f; --fg:#fff; --border:rgba(255,255,255,.12); --panel:rgba(255,255,255,.06); --panel-hover:rgba(255,255,255,.1); --tag-bg:rgba(255,255,255,.1); --btn:#009dff; }
     *{box-sizing:border-box}
@@ -14,7 +15,7 @@
 
     /* Typography */
     .title-font{font-family:Inter,ui-sans-serif,system-ui;font-weight:700}
-    .mono{font-family:"Roboto Mono",ui-monospace,monospace;font-weight:700}
+    .mono{font-family:"Roboto Mono",ui-monospace,monospace; font-weight: 700;}
     h1,h2,h3{letter-spacing:-.01em}
 
     /* Layout */
@@ -34,7 +35,7 @@
     .card{border:1px solid var(--border);background:var(--panel);border-radius:1rem;padding:1.25rem;display:flex;flex-direction:column;transition:background .2s}
     .card:hover{background:var(--panel-hover)}
     .job-title{font-size:1.125rem;margin:0}
-    .dept{margin-top:.25rem;opacity:.8;font-size:.8rem}
+    .dept{margin-top:.25rem;opacity:.4;font-size:.8rem; font-weight: normal;}
     .tags{margin-top:.75rem;display:flex;flex-wrap:wrap;gap:.5rem}
     .tag{display:inline-flex;align-items:center;gap:.35rem;padding:.34rem .64rem;border-radius:999px;border:1px solid var(--border);background:var(--tag-bg);font-size:.75rem}
 
@@ -43,7 +44,7 @@
     .btn:hover{filter:brightness(1.1)}
     .btn:active{filter:brightness(.95)}
     .btn.small{margin-top:1rem;align-self:flex-end}
-    .btn.block{margin-top:1.5rem;width:100%;justify-content:center;padding:.9rem 1.1rem;border-radius:1rem}
+    .btn.block{margin-top:1.25rem;width:100%;justify-content:center;padding:.9rem 1.1rem;border-radius:1rem}
 
     /* States */
     .state{text-align:center;opacity:.8;padding:4rem 0}
@@ -55,27 +56,29 @@
     .modal{position:fixed;inset:0;display:grid;place-items:center;padding:1rem;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .25s ease, visibility .25s ease}
     .modal.open{opacity:1;visibility:visible;pointer-events:auto}
 
-    .modal-card{width:100%;max-width:860px;border:1px solid var(--border);background:#121212;border-radius:1.25rem;padding:1.25rem;box-shadow:0 24px 80px rgba(0,0,0,.6);transform:translateY(16px) scale(.98);opacity:0;transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s ease}
+    .modal-card{width:100%;max-width:900px;border:1px solid var(--border);background:#121212;border-radius:1.25rem;padding:1.25rem;box-shadow:0 24px 80px rgba(0,0,0,.6);transform:translateY(16px) scale(.98);opacity:0;transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s ease}
     .modal.open .modal-card{transform:none;opacity:1}
-
     @media(min-width:640px){.modal-card{padding:1.75rem}}
     @media(min-width:1024px){.modal-card{padding:2rem}}
 
     .modal-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
     .modal-title{font-size:clamp(1.4rem,2.2vw,1.9rem);margin:0}
     .spacer{flex:1}
-
     .icon-btn{background:transparent;border:0;color:inherit;border-radius:.6rem;padding:.45rem;cursor:pointer}
     .icon-btn:hover{background:rgba(255,255,255,.06)}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:1rem 0}
 
-    .section{margin-top:1rem}
-    .section + .section{margin-top:1.25rem}
-    .section-title{margin:0 0 .5rem;font-size:1.05rem;opacity:.95}
-    .lead{line-height:1.6}
+    /* NEW: Modal content cards */
+    .info-card{border:1px solid var(--border);background:#0f0f0f;border-radius:1rem;padding:1rem; }
+    .info-card .section-title{margin:0 0 .5rem;font-size:1.05rem}
+    .info-card .lead{line-height:1.6}
+    .info-card p, li{ opacity: 50%; font-size: small; font-weight: normal;}
+    .info-card h3{ opacity: 75%; font-family: monospace;}
+
+    .cards-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
+    @media(min-width:860px){.cards-grid{grid-template-columns:1fr 1fr}}
     .list{margin:.25rem 0 0;padding-left:1.15rem}
     .list li{margin:.25rem 0}
-
-    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:1rem 0}
 
     footer{padding:2rem 0;text-align:center;opacity:.6}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -92,13 +95,13 @@
 
       <section id="jobsGrid" class="grid empty" aria-live="polite"></section>
 
-      <footer class="mono">© <span id="year"></span> bySurf / <a href="https://www.studiobysurf.com/impressum" target="_blank">Impressum</a></footer>
+      <footer class="mono">© <span id="year"></span> bySurf / <a href="http://www.studiobysurf.com/impressum">Impressum</a></footer>
     </div>
   </main>
 
   <!-- Backdrop + Modal -->
   <div id="backdrop" class="backdrop" aria-hidden="true"></div>
-  <div id="modal" class="modal" aria-hidden="true">
+  <div id="modal" class="modal" aria-hidden="true" style="font-family: Roboto Mono !important;">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-header">
         <h2 id="modalTitle" class="modal-title title-font"></h2>
@@ -109,10 +112,14 @@
       </div>
       <div id="modalTags" class="tags"></div>
       <div class="divider"></div>
-      <div id="modalBody" class="section"></div>
-      <div id="modalRateWrap" class="section"></div>
-      <div id="modalReqs" class="section"></div>
-      <div id="modalAppReqs" class="section"></div>
+
+      <!-- NEW: cards inside the modal -->
+      <div id="descCard" class="info-card" hidden></div>
+      <div class="cards-grid">
+        <div id="reqCard" class="info-card" hidden></div>
+        <div id="appCard" class="info-card" hidden></div>
+      </div>
+
       <a class="btn block mono" href="mailto:hello@studiobysurf.com">Apply</a>
     </div>
   </div>
@@ -128,10 +135,9 @@
       closeModal: document.getElementById('closeModal'),
       modalTitle: document.getElementById('modalTitle'),
       modalTags: document.getElementById('modalTags'),
-      modalBody: document.getElementById('modalBody'),
-      modalRateWrap: document.getElementById('modalRateWrap'),
-      modalReqs: document.getElementById('modalReqs'),
-      modalAppReqs: document.getElementById('modalAppReqs'),
+      descCard: document.getElementById('descCard'),
+      reqCard: document.getElementById('reqCard'),
+      appCard: document.getElementById('appCard'),
     };
 
     els.year.textContent = new Date().getFullYear();
@@ -140,7 +146,6 @@
     function externalIcon(){return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3h7v7M10 14 21 3M21 10v11H3V3h11"/></svg>'}
     function createTag(text){const s=document.createElement('span');s.className='tag mono';s.innerHTML=tagIcon()+" "+text;return s}
     function normalizeTags(tags){if(Array.isArray(tags))return tags;if(typeof tags==='string')return tags.split(',').map(s=>s.trim()).filter(Boolean);return[]}
-
     function stateEl(text){const d=document.createElement('div');d.className='state mono';d.textContent=text;return d}
 
     function createCard(job){
@@ -176,36 +181,38 @@
     let lastFocus=null;
     function openModal(job){
       lastFocus=document.activeElement;
-      // Fill content first
+
+      // Title + tags
       els.modalTitle.textContent=job.title||'Job';
       els.modalTags.innerHTML='';
       normalizeTags(job.tags).forEach(t=>els.modalTags.appendChild(createTag(t)));
 
-      els.modalBody.innerHTML='';
+      // Description card
       if(job.description){
-        const wrap=document.createElement('div');wrap.className='section';
-        wrap.innerHTML='<h3 class="section-title title-font">Job description</h3>'+
-                        '<p class="mono lead">'+job.description+'</p>';
-        els.modalBody.replaceWith(wrap); els.modalBody=wrap; // keep ref
-      }
+        els.descCard.hidden=false;
+        els.descCard.innerHTML = `
+          <h3 class="section-title title-font">Job description</h3>
+          <p class="mono lead">${job.description}</p>
+        `;
+      } else { els.descCard.hidden=true; els.descCard.innerHTML=''; }
 
-      els.modalRateWrap.innerHTML='';
-      if(job.rate){
-        els.modalRateWrap.innerHTML='<h3 class="section-title title-font">Rate</h3>'+
-                                    '<p class="mono lead" style="margin-top:.25rem">'+job.rate+'</p>';
-      }
+      // Requirements card (left)
+      if(Array.isArray(job.requirements) && job.requirements.length){
+        els.reqCard.hidden=false;
+        els.reqCard.innerHTML = `
+          <h3 class="section-title title-font">Requirements</h3>
+          <ul class="list mono">${job.requirements.map(r=>`<li>${r}</li>`).join('')}</ul>
+        `;
+      } else { els.reqCard.hidden=true; els.reqCard.innerHTML=''; }
 
-      els.modalReqs.innerHTML='';
-      if(job.requirements&&job.requirements.length){
-        els.modalReqs.innerHTML='<h3 class="section-title title-font">Requirements</h3>'+
-                                '<ul class="list mono">'+job.requirements.map(r=>'\n<li>'+r+'</li>').join('')+'\n</ul>';
-      }
-
-      els.modalAppReqs.innerHTML='';
-      if(job.application_requirements&&job.application_requirements.length){
-        els.modalAppReqs.innerHTML='<h3 class="section-title title-font">Application Requirements</h3>'+
-                                   '<ul class="list mono">'+job.application_requirements.map(r=>'\n<li>'+r+'</li>').join('')+'\n</ul>';
-      }
+      // Application requirements card (right)
+      if(Array.isArray(job.application_requirements) && job.application_requirements.length){
+        els.appCard.hidden=false;
+        els.appCard.innerHTML = `
+          <h3 class="section-title title-font">Application Requirements</h3>
+          <ul class="list mono">${job.application_requirements.map(r=>`<li>${r}</li>`).join('')}</ul>
+        `;
+      } else { els.appCard.hidden=true; els.appCard.innerHTML=''; }
 
       // Show with animation
       els.backdrop.classList.add('open');
