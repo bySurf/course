@@ -34,6 +34,7 @@
     .card{border:1px solid var(--border);background:var(--panel);border-radius:1rem;padding:1.25rem;display:flex;flex-direction:column;transition:background .2s}
     .card:hover{background:var(--panel-hover)}
     .job-title{font-size:1.125rem;margin:0}
+    .dept{margin-top:.25rem;opacity:.8;font-size:.8rem}
     .tags{margin-top:.75rem;display:flex;flex-wrap:wrap;gap:.5rem}
     .tag{display:inline-flex;align-items:center;gap:.35rem;padding:.34rem .64rem;border-radius:999px;border:1px solid var(--border);background:var(--tag-bg);font-size:.75rem}
 
@@ -45,7 +46,7 @@
     .btn.block{margin-top:1.5rem;width:100%;justify-content:center;padding:.9rem 1.1rem;border-radius:1rem}
 
     /* States */
-    .state{text-align:center;opacity:.8;padding:4rem 0; grid-column: 2/3;}
+    .state{text-align:center;opacity:.8;padding:4rem 0}
 
     /* Modal — animated */
     .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);opacity:0;visibility:hidden;transition:opacity .25s ease, visibility .25s ease}
@@ -85,13 +86,13 @@
     <div class="container">
       <header class="site">
         <h1 class="title title-font">Opportunities</h1>
-        <p class="subtitle mono" style="max-width: 65%;">As we grow our channel and try to create the best content on internet oddities, we're also looking for talented people to join the team!</p>
+        <p class="subtitle mono">bySurf</p>
       </header>
       <p class="desc mono">Open Positions</p>
 
       <section id="jobsGrid" class="grid empty" aria-live="polite"></section>
 
-      <footer class="mono">© <span id="year"></span> bySurf / <a href="https://www.studiobysurf.com/impressum" target="_blank">Impressum</a></footer>
+      <footer class="mono">© <span id="year"></span> bySurf</footer>
     </div>
   </main>
 
@@ -145,6 +146,7 @@
     function createCard(job){
       const card=document.createElement('article');card.className='card';
       const h=document.createElement('h3');h.className='job-title title-font';h.textContent=job.title||'Untitled';card.appendChild(h);
+      if (job.department) { const dept=document.createElement('div'); dept.className='dept mono'; dept.textContent = job.department; card.appendChild(dept); }
       const tags=document.createElement('div');tags.className='tags';normalizeTags(job.tags).forEach(t=>tags.appendChild(createTag(t)));card.appendChild(tags);
       const btn=document.createElement('button');btn.className='btn small mono';btn.innerHTML='Learn more '+externalIcon();btn.addEventListener('click',()=>openModal(job));card.appendChild(btn);
       return card;
@@ -154,7 +156,7 @@
       els.grid.classList.add('empty');
       els.grid.innerHTML='';
       els.grid.appendChild(stateEl('Loading roles…'));
-      try {
+      try{
         const res=await fetch(DATA_URL,{cache:'no-store'});
         if(!res.ok) throw new Error();
         const data=await res.json();
@@ -163,10 +165,10 @@
         if(!jobs.length){els.grid.classList.add('empty');els.grid.appendChild(stateEl('No positions posted yet. Check back soon.'));return}
         els.grid.classList.remove('empty');
         jobs.forEach(j=>els.grid.appendChild(createCard(j)));
-      } catch(e){
+      }catch(e){
         els.grid.classList.add('empty');
         els.grid.innerHTML='';
-        els.grid.appendChild(stateEl("No open positions at the moment."));
+        els.grid.appendChild(stateEl("Couldn't load jobs yet. Please verify your JSON URL."));
       }
     }
 
