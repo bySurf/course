@@ -1,29 +1,5 @@
 [
   {
-    "title": "Video Editor",
-    "tags": [
-      "Remote",
-      "Video Editing",
-      "Part-Time",
-      "Freelance"
-    ],
-    "department": "Video Editing",
-    "description": "We're looking for a highly skilled Video Editor (Premiere Pro) that is able to adapt to a fixed editing style and expand on it.",
-    "rate": "$15/min",
-    "requirements": [
-      "2 - 3 years experience in Adobe Premiere Pro",
-      "Ability to work alone or with a partner",
-      "Ability to meet deadlines",
-      "Fluent in English",
-      "18/yo"
-    ],
-    "application_requirements": [
-      "Portfolio",
-      "Social Media with Work",
-      "Short text about yourself"
-    ]
-  },
-  {
     "title": "Scriptwriter",
     "tags": [
       "Remote",
@@ -45,6 +21,30 @@
       "Scripts you've written before (Google Docs Link)",
       "Videos where you've written the script",
       "A short text about yourself"
+    ]
+  },
+  {
+    "title": "Inbetween Animator",
+    "tags": [
+      "Remote",
+      "Animation",
+      "Part-Time",
+      "Freelance"
+    ],
+    "department": "Video Animation",
+    "description": "We're looking for a inbetween animator to take an almost finished video and then to add animations that better illustrate what is being talked about.",
+    "rate": "$20/animation",
+    "requirements": [
+      "2+ years of experience in either Blender or Adobe After Effects",
+      "Ability to work alone or with a partner",
+      "Ability to meet deadlines",
+      "Fluent in English",
+      "18/yo"
+    ],
+    "application_requirements": [
+      "Portfolio (with 2D Animations)",
+      "Social Media with Work",
+      "Short text about yourself"
     ]
   }
 ]
