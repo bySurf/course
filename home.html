@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Studio bySurf — Internet Awareness</title>
+  <meta name="description" content="Studio bySurf is the production team behind the bySurf channel. We create immersive documentaries to raise awareness about the internet's darkest corners." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --card-border: rgba(255,255,255,0.15);
+      --text: #eaeaea;
+      --muted: #bdbdbd;
+      --accent: #009dff;
+      --glass-bg: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.12);
+      --radius: 14px;
+      --shadow: 0 10px 25px rgba(0,0,0,0.3);
+      --maxw: 1300px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Roboto Mono", monospace;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
+      font-weight: 800;
+      margin: 0 0 .6rem 0;
+      letter-spacing: -0.02em;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 35px 20px;
+    }
+
+    .card {
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      background: var(--glass-bg);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .brand img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .links { display: flex; align-items: center; gap: 20px; }
+    .links a {
+      padding: 10px 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      transition: border-color .2s ease, background .2s ease, transform .15s ease;
+      opacity: .95;
+    }
+    .links a:hover { border-color: var(--glass-border); opacity: 1; }
+
+    .hamburger {
+      display: none;
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .hamburger svg { width: 22px; height: 22px; }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; right: 16px; left: 16px;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      background: rgba(15,15,15,0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 10px;
+      box-shadow: var(--shadow);
+    }
+    .mobile-menu a {
+      display: block;
+      padding: 14px 12px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+    .mobile-menu a:hover { border-color: var(--glass-border); }
+    .mobile-menu.open { display: block; }
+
+    .hero {
+      position: relative;
+      min-height: 45vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-media iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120vw;
+      height: 120vh;
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.55);
+    }
+
+    .hero-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 30px 20px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+    .hero p { color: #e5eef5; opacity: 0.95; margin-top: 10px; font-size: clamp(0.95rem, 1.5vw, 1.05rem); }
+
+    section { padding: 26px 0 34px; }
+    .stack { display: grid; gap: 22px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 18px;
+      font-family: "Roboto Mono", monospace; font-weight: 700;
+      border: 0; border-radius: 12px;
+      background: var(--accent); color: #fff;
+      cursor: pointer; text-decoration: none;
+      transition: transform .15s ease, filter .2s ease;
+      box-shadow: 0 8px 18px rgba(0,157,255,0.3);
+    }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.03); }
+    .btn:active { transform: translateY(0); }
+
+    footer { color: var(--muted); font-size: .9rem; padding: 24px 0 60px; text-align: center; }
+
+    @media (max-width: 900px) {
+      .links { display: none; }
+      .hamburger { display: inline-flex; }
+      .hero { min-height: 40vh; }
+      .nav-inner { height: 62px; }
+    }
+
+    @media (min-width: 901px) {
+      .mobile-menu { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="https://studiobysurf.com" aria-label="Studio bySurf Home">
+        <img src="https://bysurf.github.io/course/studio%20bysurf%20new%20logo%202025.png" alt="Studio bySurf Logo">
+      </a>
+
+      <div class="links" role="navigation" aria-label="Primary">
+        <a href="https://www.studiobysurf.com/opportunities" target="_blank" rel="noopener">Opportunities</a>
+        <a href="https://www.youtube.com/@iambysurf" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.studiobysurf.com/impressum" target="_blank" rel="noopener">Impressum</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="mobile-menu container" role="menu" aria-label="Mobile navigation">
+      <a role="menuitem" href="https://www.studiobysurf.com/opportunities" target="_blank" rel="noopener">Opportunities</a>
+      <a role="menuitem" href="https://www.youtube.com/@iambysurf" target="_blank" rel="noopener">YouTube</a>
+      <a role="menuitem" href="https://www.studiobysurf.com/impressum" target="_blank" rel="noopener">Impressum</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="container stack">
+      <header class="card hero" aria-label="Internet Awareness header">
+        <div class="hero-media" aria-hidden="true">
+          <iframe
+            src="https://www.youtube.com/embed/6h_DLZTqlo8?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=6h_DLZTqlo8&modestbranding=1&playsinline=1"
+            title="Background video"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-fade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <h1>Internet Awareness</h1>
+          <p>Studio bySurf is the production team behind the bySurf channel. We are dedicated to spreading awareness about the internet's darkest corners via immersive documentaries.</p>
+        </div>
+      </header>
+
+      <section class="card" aria-label="About Studio bySurf" style="padding: 28px;">
+        <h2 style="margin-bottom: 12px;">About</h2>
+        <p>Studio bySurf is the production team behind bySurf videos.</p>
+        <p>We have amassed over&nbsp;2,000,000&nbsp;views with our first ever documentary and have already grown a loyal audience of over&nbsp;40,000&nbsp;(and growing) subscribers.</p>
+        <p>The goal isn't just to get views and make money, it's to blend the two bridges between creativity, storytelling and investigative documentaries.</p>
+
+        <p>Interested in working with the Studio?</p>
+        <a class="btn" href="mailto:hello@studiobysurf.com" aria-label="Email Studio bySurf">Contact</a>
+        <p style="color: var(--muted); margin-top: 10px; font-size: .95rem;">Viewer questions may or may not be ignored.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="container">
+    © <span id="year"></span> Studio bySurf. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    }, { passive: true });
+
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }));
+  </script>
+</body>
+</html>
