@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Opportunities · bySurf</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
@@ -92,12 +91,6 @@
 <body>
   <main>
     <div class="container">
-      <header class="site">
-        <h1 class="title title-font">Opportunities</h1>
-        <p class="subtitle mono">We are not offering careers and are targeting independent freelancers to comission services from.
-</p>
-      </header>
-      <p class="desc mono">Open Positions</p>
 
       <section id="jobsGrid" class="grid empty" aria-live="polite"></section>
 
@@ -213,7 +206,7 @@
       if(job.rate){
         els.rateCard.hidden=false;
         els.rateCard.innerHTML = `
-          <h3 class="section-title title-font">Rate</h3>
+          <h3 class="section-title title-font">Rate + Assets</h3>
           <p class="mono value">${job.rate}</p>
         `;
       } else { els.rateCard.hidden=true; els.rateCard.innerHTML=''; }
