@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "title": "Content Creator",
+    "tags": [
+      "Remote",
+      "Producing Exclusive Content"
+    ],
+    "department": "Content Creation",
+    "description": "We're looking for a experienced content creator making video-essays or documentaries on various interesting topics.\n\nYou will be asked to pitch a topic that can produce multiple 8-10 minute videos or a single 15-25 minute video. You'll be compensated $500 - 1,000 depending on the duration of your content that we require from you.",
+    "rate": "$500 - 1,000 (depending on length)",
+    "requirements": [
+      "Experienced Content Creator",
+      "Able to work on your own",
+      "Able to meet deadlines",
+      "Knowledge on storytelling and high-quality visuals."
+    ],
+    "application_requirements": [
+      "Your YouTube Channel",
+      "What Content you make"
+    ]
+  },
+  {
+    "title": "Scriptwriter",
+    "tags": [
+      "Remote",
+      "Freelance",
+      "Scriptwriting"
+    ],
+    "department": "Production",
+    "description": "We're looking for a experienced Scriptwriter for our VOD-Platform, bySurfTV. You will be given a topic and required to research and write a detailed summarization of the topic.",
+    "rate": "$150 - 300 per script",
+    "requirements": [
+      "2+ years of experience in scriptwriting for Documentaries",
+      "Know-how on Storytelling",
+      "Able to make something complex easily digestable and understandable",
+      "Fluent in English",
+      "Able to meet deadlines",
+      "Able to work on your own"
+    ],
+    "application_requirements": [
+      "2-3 scripts you've worked on before (Google Docs Links only)"
+    ]
+  }
+]
