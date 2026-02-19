@@ -1,25 +1,24 @@
-[
-  {
-    "title": "Assistant Video Editor",
-    "tags": [
-      "Remote",
-      "Freelance",
-      "Part-Time"
-    ],
-    "department": "Video Production",
-    "description": "Once or twice a month you'll get a blank video with voiceover and music laid out, it's your job to get a sense of rhythm within the videos and follow our video style aswell as adding your own creative edits within our framework.",
-    "requirements": [
-      "3+ Years of Experience in Adobe Premiere Pro and After Effects",
-      "Ability to deliver on deadlines",
-      "Ability to work on your own or with someone else",
-      "Being able to imagine a shot and then bringing it to life",
-      "18/yo",
-      "Fluent in English"
-    ],
-    "application_requirements": [
-      "Work reel / Portfolio",
-      "What capabilities you have for Editing",
-      "If you're ready to perform a Trial Edit"
-    ]
-  }
-]
+{
+  "title": "Assistant Video Editor",
+  "tags": [
+    "Remote",
+    "Freelance",
+    "Part-Time"
+  ],
+  "department": "Video Production",
+  "description": "Once or twice a month you'll get a blank video with voiceover and music laid out, it's your job to get a sense of rhythm within the videos and follow our video style aswell as adding your own creative edits within our framework.",
+  "requirements": [
+    "3+ Years of Experience in Adobe Premiere Pro and After Effects",
+    "Ability to deliver on deadlines",
+    "Ability to work on your own or with someone else",
+    "Being able to imagine a shot and then bringing it to life",
+    "Ability to add immersive Sound Design to your Edits",
+    "18/yo",
+    "Fluent in English"
+  ],
+  "application_requirements": [
+    "Work reel / Portfolio",
+    "What capabilities you have for Editing",
+    "If you're ready to perform a Trial Edit"
+  ]
+}
